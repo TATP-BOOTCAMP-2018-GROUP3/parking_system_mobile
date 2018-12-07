@@ -9,11 +9,15 @@ const PlaceHolder = ({ className = '', ...restProps }) => (
 export default class CustomerPageContainer extends Component {
     render() {
         return (
+
             <div style={{ padding: '15px 0' }}>
+                Customer Page Container !!
                 <WingBlank><PlaceHolder /></WingBlank>
+
 
                 <WhiteSpace size="lg" />
                 <WingBlank size="md"><PlaceHolder /></WingBlank>
+                
 
                 <WhiteSpace size="lg" />
                 <WingBlank size="sm"><PlaceHolder /></WingBlank>
