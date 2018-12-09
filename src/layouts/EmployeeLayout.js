@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 import { TabBar } from 'antd-mobile'; 
-import CustomerPageContainer from '../containers/CustomerPageContainer';
 import ParkingOrderResource from '../resources/ParkingOrderResource';
+import ReturnOrderResource from '../resources/ReturnOrderResource';
 import ViewPendingOrdersContainer from '../containers/employee/ViewPendingOrdersContainer';
 import MyParkingOrderPageContainer from '../containers/employee/MyParkingOrderPageContainer';
+import MyReturnOrderPageContainer from '../containers/employee/MyReturnOrderPageContainer';
 import HandleParkingOrderPageContainer from '../containers/employee/HandleParkingOrderPageContainer';
+import HandleReturnOrderPageContainer from '../containers/employee/HandleReturnOrderPageContainer';
 import CompleteOrderPageContainer from '../containers/employee/CompleteOrderPageContainer';
 
 class MainLayout extends Component {
@@ -111,13 +113,21 @@ class MainLayout extends Component {
               src='/images/car_icon_selected.svg' 
             />
             }
-            selected={this.props.selectedTab === '/employee/myfetching'}
+            selected={this.props.selectedTab.includes('/employee/returnorders')}
             onPress={() => {
-              this.props.updateSelectedTab('/employee/myfetching');
-              window.history.pushState(null, null, "/employee/myfetching");
+              this.props.updateSelectedTab('/employee/returnorders');
+              window.history.pushState(null, null, "/employee/returnorders");
+              ReturnOrderResource.getByStatus("Pending")
+              .then(res => res.json())
+              .then(res => {
+                  this.props.refreshPendingOrders(res);
+              });
             }}
           >
-            <CustomerPageContainer/>
+            {
+              this.props.selectedTab === '/employee/returnorders' ? 
+              <MyReturnOrderPageContainer/> : <HandleReturnOrderPageContainer/>
+            }
           </TabBar.Item>
           <TabBar.Item
             icon={
