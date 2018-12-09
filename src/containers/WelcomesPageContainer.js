@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import 'antd-mobile/dist/antd-mobile.css';
 import { List, InputItem, Switch, Stepper, Slider, Radio, Checkbox, TextareaItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
+import '../css/LoginForm.css'
 
 export default class WelcomesPageContainer extends Component {
     sendSimpleResponseToBackEnd = () => {
@@ -20,12 +21,12 @@ export default class WelcomesPageContainer extends Component {
     render() {
         const { getFieldProps } = this.props.form;
         return (
-            <div>
+            <div className="login-form">
                 <h1>Welcome!</h1>
                 
-                <List>
+                <List >
                     {/* <List>表单输入项</List> */}
-                    <List>
+                    <List.Item>
                         <InputItem
                             {...getFieldProps('input3', {
                                 initialValue: 'User',
@@ -38,8 +39,11 @@ export default class WelcomesPageContainer extends Component {
                             clear
                             placeholder="请输入密码"
                         >Password</InputItem>
-                    </List>
+                    </List.Item>
                 </List>
+                
+                <Checkbox>Remember me</Checkbox>
+              
                 <Button type="primary" onClick={this.directToCustomerPageContainer}>Login</Button><WhiteSpace />
                 <Button type="primary" onClick={this.sendSimpleResponseToBackEnd}>Testing for simple request from BE</Button><WhiteSpace />
 
