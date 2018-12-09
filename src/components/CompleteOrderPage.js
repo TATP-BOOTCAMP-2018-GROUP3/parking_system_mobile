@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { List, WhiteSpace, WingBlank, Result, Icon } from 'antd-mobile';
-
-const Item = List.Item;
-
+import { WhiteSpace, WingBlank, Result, Icon } from 'antd-mobile';
 
 class CompleteOrderPage extends Component {
 

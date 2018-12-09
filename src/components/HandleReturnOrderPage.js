@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
 import { List, WhiteSpace, WingBlank, Picker, Button } from 'antd-mobile';
-import { createForm } from 'rc-form';
-import ParkingOrderResource from '../resources/ParkingOrderResource';
+import ReturnOrderResource from '../resources/ReturnOrderResource';
+import './HandleOrderPage.css'
 
 const Item = List.Item;
 
-const parkingLots = [
-                        {label: 'Parking Lot 1', value: 'Parking Lot 1'},
-                        {label: 'Hong Kong Science Park Parking Lot', value: 'Hong Kong Science Park Parking Lot'},
-                        {label: '南方軟件園 停車場', value: '南方軟件園 停車場'}
-                    ]
-
-class HandleParkingOrderPage extends Component {
+class HandleReturnOrderPage extends Component {
 
     onSubmit = () => {
-        if (this.props.form.getFieldProps('parkingLot').value === undefined){
-            return;
-        }
-        let parkingLotId = this.props.form.getFieldProps('parkingLot').value[0];
-        ParkingOrderResource.markCompleted({...this.props.handlingOrder, parkingLot: parkingLotId})
+        ReturnOrderResource.markCompleted(this.props.handlingOrder)
         .then(res => {
             this.props.updateSelectedTab('/employee/completeorder');
             window.history.pushState(null, null, "/employee/completeorder");
@@ -26,7 +16,6 @@ class HandleParkingOrderPage extends Component {
     }
 
     render() {
-        const { getFieldProps } = this.props.form;
         const order = this.props.handlingOrder;
         return (
             <WingBlank size="md">
@@ -41,7 +30,7 @@ class HandleParkingOrderPage extends Component {
                             <table style={{width: '100%', textAlign: 'center'}}>
                                 <tbody>
                                     <tr>
-                                        <td><h3>Parking Order</h3></td>
+                                        <td><h3>Return Order</h3></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -56,6 +45,20 @@ class HandleParkingOrderPage extends Component {
                                     <tr>
                                         <td>Order ID: </td>
                                         <td style={{float: 'right'}}>{order.id}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Item>
+                        <Item
+                            multipleLine
+                            onClick={() => {}}
+                            key='parkingOrderId'
+                        >
+                            <table style={{width: '100%'}}>
+                                <tbody>
+                                    <tr>
+                                        <td>Parking Order ID: </td>
+                                        <td style={{float: 'right'}}>{order.parkingOrderId}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -88,15 +91,6 @@ class HandleParkingOrderPage extends Component {
                                 </tbody>
                             </table>
                         </Item>
-                        <Picker data={parkingLots} extra="Please choose" cols={1} {...getFieldProps('parkingLot', {
-                                validate: [{
-                                trigger: 'onBlur',
-                                rules: [{
-                                    required: true,
-                                }]
-                            }]})}>
-                            <Item multipleLine arrow="horizontal">&nbsp;Parking Lot: </Item>
-                        </Picker>
                     </List>
                     <WhiteSpace size="xl" />
                     <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit}>Done !</Button>
@@ -106,6 +100,4 @@ class HandleParkingOrderPage extends Component {
     }
 }
 
-const HandleParkingOrderPageWrapper = createForm()(HandleParkingOrderPage);
-
-export default HandleParkingOrderPageWrapper;
+export default HandleReturnOrderPage;
