@@ -1,10 +1,17 @@
-const initialState = { 
+const initialState = {
+  selectedTab: "",
   pendingOrders: [],
-  inProgressOrders: []
+  inProgressOrders: [],
+  handlingOrder: {},
 };
   
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case "UPDATE_SELECTED_TAB":
+      return {
+                ...state,
+                selectedTab: payload
+              }
     case "REFRESH_PENDING_ORDERS":
       return {
               ...state,
@@ -15,6 +22,11 @@ export default (state = initialState, { type, payload }) => {
               ...state,
               inProgressOrders: payload
               };
+    case "UPDATE_HANDLING_ORDER":
+      return {
+                ...state,
+                handlingOrder: payload
+              }
     default:
       return state;
   }

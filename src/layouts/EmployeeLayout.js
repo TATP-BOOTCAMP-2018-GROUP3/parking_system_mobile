@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 import { TabBar } from 'antd-mobile'; 
 import CustomerPageContainer from '../containers/CustomerPageContainer';
-import ViewPendingOrdersContainer from '../containers/ViewPendingOrdersContainer.js';
 import ParkingOrderResource from '../resources/ParkingOrderResource';
-import MyParkingOrderPageContainer from '../containers/MyParkingOrderPageContainer';
+import ViewPendingOrdersContainer from '../containers/employee/ViewPendingOrdersContainer';
+import MyParkingOrderPageContainer from '../containers/employee/MyParkingOrderPageContainer';
+import HandleParkingOrderPageContainer from '../containers/employee/HandleParkingOrderPageContainer';
+import CompleteOrderPageContainer from '../containers/employee/CompleteOrderPageContainer';
 
 class MainLayout extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedTab: window.location.pathname,
-    };
-  }
 
+  componentDidMount(){
+    this.props.updateSelectedTab(window.location.pathname);
+  }
 
   render() {
     return (
@@ -42,11 +41,9 @@ class MainLayout extends Component {
               src='/images/order_icon_selected.svg' 
             />
             }
-            selected={this.state.selectedTab === '/employee'}
+            selected={this.props.selectedTab === '/employee'}
             onPress={() => {
-              this.setState({
-                selectedTab: '/employee',
-              });
+              this.props.updateSelectedTab('/employee');
               window.history.pushState(null, null, "/employee");
               ParkingOrderResource.getByStatus("Pending")
               .then(res => res.json())
@@ -55,7 +52,10 @@ class MainLayout extends Component {
               });
             }}
           >
-            <ViewPendingOrdersContainer ref="viewPendingOrdersContainer"/>
+            {
+              this.props.selectedTab === '/employee/completeorder' ? 
+              <CompleteOrderPageContainer/> : <ViewPendingOrdersContainer/>
+            }
           </TabBar.Item>
           <TabBar.Item
             title="Grabbed Orders"
@@ -76,11 +76,9 @@ class MainLayout extends Component {
               src='/images/park_icon_selected.svg' 
             />
             }
-            selected={this.state.selectedTab === '/employee/grabbedparkingorders'}
+            selected={this.props.selectedTab.includes('/employee/grabbedparkingorders')}
             onPress={() => {
-              this.setState({
-                selectedTab: '/employee/grabbedparkingorders',
-              });
+              this.props.updateSelectedTab('/employee/grabbedparkingorders');
               window.history.pushState(null, null, "/employee/grabbedparkingorders");
               ParkingOrderResource.getByStatus("In Progress")
               .then(res => res.json())
@@ -89,7 +87,10 @@ class MainLayout extends Component {
               });
             }}
           >
-            <MyParkingOrderPageContainer/>
+            {
+              this.props.selectedTab === '/employee/grabbedparkingorders' ? 
+              <MyParkingOrderPageContainer/> : <HandleParkingOrderPageContainer/>
+            }
           </TabBar.Item>
           <TabBar.Item
             title="Fetching Orders"
@@ -110,11 +111,9 @@ class MainLayout extends Component {
               src='/images/car_icon_selected.svg' 
             />
             }
-            selected={this.state.selectedTab === '/employee/myfetching'}
+            selected={this.props.selectedTab === '/employee/myfetching'}
             onPress={() => {
-              this.setState({
-                selectedTab: '/employee/myfetching',
-              });
+              this.props.updateSelectedTab('/employee/myfetching');
               window.history.pushState(null, null, "/employee/myfetching");
             }}
           >
@@ -137,11 +136,9 @@ class MainLayout extends Component {
             }
             title="Logout"
             key="logout"
-            selected={this.state.selectedTab === '/logout'}
+            selected={this.props.selectedTab === '/logout'}
             onPress={() => {
-              this.setState({
-                selectedTab: '/logout',
-              });
+              this.props.updateSelectedTab('/logout');
               window.history.pushState(null, null, "/login");
             }}
             >
