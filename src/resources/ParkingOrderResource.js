@@ -1,8 +1,9 @@
 const hostname = "http://localhost:8080";
+const resourceName = "/orders";
 
 export default {
-    getByStatus: (status) => fetch(hostname + "/orders?status=" + status, {method: 'GET', mode: 'cors'}),
-    add: (order) => fetch(hostname + "/orders",
+    getByStatus: (status) => fetch(hostname + resourceName + "?status=" + status, {method: 'GET', mode: 'cors'}),
+    add: (order) => fetch(hostname + resourceName,
                     {
                         method: 'POST',
                         mode: 'cors',
@@ -11,7 +12,7 @@ export default {
                         }),
                         body: JSON.stringify(order)
                     }),
-    grab: (order) => fetch(hostname + "/orders/" + order.id,
+    grab: (order) => fetch(hostname + resourceName + "/" + order.id,
                     {
                         method: 'PUT',
                         mode: 'cors',
@@ -20,7 +21,7 @@ export default {
                         }),
                         body: JSON.stringify({...order, ownedByEmployeeId: 1, status: 'In Progress'})
                     }),
-    markCompleted: (order) => fetch(hostname + "/orders/" + order.id,
+    markCompleted: (order) => fetch(hostname + resourceName + "/" + order.id,
                     {
                         method: 'PUT',
                         mode: 'cors',
