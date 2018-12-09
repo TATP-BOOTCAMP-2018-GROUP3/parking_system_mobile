@@ -1,21 +1,27 @@
-import EmployeeLayout from '../layouts/EmployeeLayout.js'
+import EmployeeLayout from '../../layouts/EmployeeLayout'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-    pendingOrders: state.EmployeeReducer.pendingOrders
+    selectedTab: state.EmployeeReducer.selectedTab
 })
 
 const mapDispatchToProps = dispatch => ({
-  refreshPendingOrders: data => {
+  updateSelectedTab: tab => {
     dispatch({
-      type: "REFRESH_PENDING_ORDERS",
-      payload: data
+      type: "UPDATE_SELECTED_TAB",
+      payload: tab
     });
   },
-  refreshInProgressParkingOrder: data => {
+  refreshPendingOrders: pendingOrders => {
+    dispatch({
+      type: "REFRESH_PENDING_ORDERS",
+      payload: pendingOrders
+    });
+  },
+  refreshInProgressParkingOrder: inProgressOrders => {
     dispatch({
       type: "REFRESH_IN_PROGRESS_PARKING_ORDERS",
-      payload: data
+      payload: inProgressOrders
     });
   }
 });

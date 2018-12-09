@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import CustomerPageContainer from './containers/CustomerPageContainer';
 import WelcomesPageContainer from './containers/WelcomesPageContainer'
-import EmployeeLayoutContainer from './containers/EmployeeLayoutContainer'
+import EmployeeLayoutContainer from './containers/employee/EmployeeLayoutContainer'
 
 class App extends Component {
   render() {

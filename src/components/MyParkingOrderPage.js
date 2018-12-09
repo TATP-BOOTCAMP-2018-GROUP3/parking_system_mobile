@@ -18,6 +18,13 @@ class MyParkingOrderPage extends Component {
         });
     }
 
+    handleOrder(order){
+        let newPathName = this.props.selectedTab + '/' + order.id;
+        window.history.pushState(null, null, newPathName);
+        this.props.handleSelectedOrder(order);
+        this.props.updateSelectedTab(newPathName);
+    }
+
     render() {
         return (
             <List renderHeader={() => 'Grabbed Parking Orders'} style={{maxHeight: '200px'}}>
@@ -25,7 +32,7 @@ class MyParkingOrderPage extends Component {
                     this.props.inProgressOrders.map((order) => 
                     <Item
                         multipleLine
-                        onClick={() => {}}
+                        onClick={() => {this.handleOrder(order)}}
                         platform="android"
                         key={order.id}
                     >
