@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { TabBar } from 'antd-mobile'; 
 import CustomerPageContainer from '../containers/CustomerPageContainer';
 import ViewPendingOrdersContainer from '../containers/ViewPendingOrdersContainer.js';
+import ParkingOrderResource from '../resources/ParkingOrderResource';
 
 class MainLayout extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class MainLayout extends Component {
                 selectedTab: '/employee',
               });
               window.history.pushState(null, null, "/employee");
-              fetch("http://localhost:8080/orders?status=Pending", { mode: 'cors' })
+              ParkingOrderResource.getByStatus("Pending")
               .then(res => res.json())
               .then(res => {
                   this.props.refreshPendingOrders(res);
