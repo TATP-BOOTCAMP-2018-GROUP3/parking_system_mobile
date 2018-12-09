@@ -8,13 +8,11 @@ import WelcomesPageContainer from './containers/WelcomesPageContainer'
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-            <Switch>
-                <Route path="/" exact component={WelcomesPageContainer} />
-                <Route path="/customer" exact component={CustomerPageContainer} />
-            </Switch>
-        </header>
+      <div>
+        <Switch>
+            <Route path="/" exact component={WelcomesPageContainer} />
+            <Route path="/customer" exact component={CustomerPageContainer} />
+        </Switch>
       </div>
     );
   }
