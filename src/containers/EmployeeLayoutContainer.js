@@ -11,6 +11,12 @@ const mapDispatchToProps = dispatch => ({
       type: "REFRESH_PENDING_ORDERS",
       payload: data
     });
+  },
+  refreshInProgressParkingOrder: data => {
+    dispatch({
+      type: "REFRESH_IN_PROGRESS_PARKING_ORDERS",
+      payload: data
+    });
   }
 });
 

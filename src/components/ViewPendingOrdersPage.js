@@ -40,7 +40,7 @@ class ViewPendingOrdersPage extends Component {
                                     <td style={{width: '50%'}}>
                                         <b>Order: {order.id}</b>
                                         <Brief>
-                                        CarID: {order.carId} <br/>
+                                        Car ID: {order.carId} <br/>
                                         Contact Number: {order.phoneNumber}
                                         </Brief>
                                     </td>

@@ -1,5 +1,6 @@
 const initialState = { 
-  pendingOrders: []
+  pendingOrders: [],
+  inProgressOrders: []
 };
   
 export default (state = initialState, { type, payload }) => {
@@ -8,6 +9,11 @@ export default (state = initialState, { type, payload }) => {
       return {
               ...state,
               pendingOrders: payload
+              };
+    case "REFRESH_IN_PROGRESS_PARKING_ORDERS":
+      return {
+              ...state,
+              inProgressOrders: payload
               };
     default:
       return state;

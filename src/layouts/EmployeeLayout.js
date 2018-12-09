@@ -4,6 +4,7 @@ import { TabBar } from 'antd-mobile';
 import CustomerPageContainer from '../containers/CustomerPageContainer';
 import ViewPendingOrdersContainer from '../containers/ViewPendingOrdersContainer.js';
 import ParkingOrderResource from '../resources/ParkingOrderResource';
+import MyParkingOrderPageContainer from '../containers/MyParkingOrderPageContainer';
 
 class MainLayout extends Component {
   constructor(props) {
@@ -57,8 +58,8 @@ class MainLayout extends Component {
             <ViewPendingOrdersContainer ref="viewPendingOrdersContainer"/>
           </TabBar.Item>
           <TabBar.Item
-            title="Parking Orders"
-            key="myParkingOrders"
+            title="Grabbed Orders"
+            key="grabbedParkingOrders"
             icon={<img 
               style={{
                 width: '22px',
@@ -75,15 +76,20 @@ class MainLayout extends Component {
               src='/images/park_icon_selected.svg' 
             />
             }
-            selected={this.state.selectedTab === '/employee/myparking'}
+            selected={this.state.selectedTab === '/employee/grabbedparkingorders'}
             onPress={() => {
               this.setState({
-                selectedTab: '/employee/myparking',
+                selectedTab: '/employee/grabbedparkingorders',
               });
-              window.history.pushState(null, null, "/employee/myparking");
+              window.history.pushState(null, null, "/employee/grabbedparkingorders");
+              ParkingOrderResource.getByStatus("In Progress")
+              .then(res => res.json())
+              .then(res => {
+                  this.props.refreshInProgressParkingOrder(res);
+              });
             }}
           >
-            <CustomerPageContainer/>
+            <MyParkingOrderPageContainer/>
           </TabBar.Item>
           <TabBar.Item
             title="Fetching Orders"
