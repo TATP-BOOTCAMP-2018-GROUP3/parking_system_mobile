@@ -1,4 +1,4 @@
-const hostname = "https://parking-system-backend.herokuapp.com/";
+const hostname = "http://localhost:8080/";
 
 export default {
     getByStatus: (status) => fetch(hostname + "/orders?status=" + status, {method: 'GET', mode: 'cors'}),
