@@ -1,4 +1,4 @@
-const hostname = "https://parking-system-mobile.herokuapp.com";
+const hostname = "https://parking-system-backend.herokuapp.com";
 const resourceName = "/returnorders";
 
 export default {
