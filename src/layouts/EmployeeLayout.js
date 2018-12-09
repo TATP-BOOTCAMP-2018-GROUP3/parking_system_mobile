@@ -3,9 +3,10 @@ import { Route } from 'react-router-dom'
 import { TabBar } from 'antd-mobile'; 
 import CustomerPageContainer from '../containers/CustomerPageContainer';
 import ParkingOrderResource from '../resources/ParkingOrderResource';
-import ViewPendingOrdersContainer from '../containers/employee/ViewPendingOrdersContainer.js';
+import ViewPendingOrdersContainer from '../containers/employee/ViewPendingOrdersContainer';
 import MyParkingOrderPageContainer from '../containers/employee/MyParkingOrderPageContainer';
 import HandleParkingOrderPageContainer from '../containers/employee/HandleParkingOrderPageContainer';
+import CompleteOrderPageContainer from '../containers/employee/CompleteOrderPageContainer';
 
 class MainLayout extends Component {
 
@@ -51,7 +52,10 @@ class MainLayout extends Component {
               });
             }}
           >
-            <ViewPendingOrdersContainer ref="viewPendingOrdersContainer"/>
+            {
+              this.props.selectedTab === '/employee/completeorder' ? 
+              <CompleteOrderPageContainer/> : <ViewPendingOrdersContainer/>
+            }
           </TabBar.Item>
           <TabBar.Item
             title="Grabbed Orders"

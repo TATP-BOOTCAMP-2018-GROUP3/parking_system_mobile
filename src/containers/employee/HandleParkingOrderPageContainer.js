@@ -5,6 +5,15 @@ const mapStateToProps = state => ({
     handlingOrder: state.EmployeeReducer.handlingOrder
 })
 
-connect(mapStateToProps)(HandleParkingOrderPage)
+const mapDispatchToProps = dispatch => ({
+    updateSelectedTab: tab => {
+      dispatch({
+        type: "UPDATE_SELECTED_TAB",
+        payload: tab
+      });
+    }
+  });
 
-export default connect(mapStateToProps)(HandleParkingOrderPage)
+connect(mapStateToProps, mapDispatchToProps)(HandleParkingOrderPage)
+
+export default connect(mapStateToProps, mapDispatchToProps)(HandleParkingOrderPage)
