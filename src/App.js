@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import CustomerPageContainer from './containers/CustomerPageContainer';
-import WelcomesPageContainer from './containers/WelcomesPageContainer'
-import EmployeeLayoutContainer from './containers/employee/EmployeeLayoutContainer'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import WelcomesPageContainer from './containers/WelcomesPageContainer';
+import CustomerPageContainer from './containers/customer/CustomerPageContainer';
+import EmployeeLayoutContainer from './containers/employee/EmployeeLayoutContainer';
 
 class App extends Component {
   render() {
