@@ -91,6 +91,20 @@ class HandleReturnOrderPage extends Component {
                                 </tbody>
                             </table>
                         </Item>
+                        <Item
+                            multipleLine
+                            onClick={() => {}}
+                            key='status'
+                        >
+                            <table style={{width: '100%'}}>
+                                <tbody>
+                                    <tr>
+                                        <td>Current Status: </td>
+                                        <td style={{float: 'right'}}>{order.status}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Item>
                     </List>
                     <WhiteSpace size="xl" />
                     <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit}>Done !</Button>

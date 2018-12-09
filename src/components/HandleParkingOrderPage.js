@@ -88,6 +88,20 @@ class HandleParkingOrderPage extends Component {
                                 </tbody>
                             </table>
                         </Item>
+                        <Item
+                            multipleLine
+                            onClick={() => {}}
+                            key='status'
+                        >
+                            <table style={{width: '100%'}}>
+                                <tbody>
+                                    <tr>
+                                        <td>Current Status: </td>
+                                        <td style={{float: 'right'}}>{order.status}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Item>
                         <Picker data={parkingLots} extra="Please choose" cols={1} {...getFieldProps('parkingLot', {
                                 validate: [{
                                 trigger: 'onBlur',
