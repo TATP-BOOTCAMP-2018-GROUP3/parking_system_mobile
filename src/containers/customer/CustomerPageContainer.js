@@ -29,7 +29,7 @@ export default class CustomerPageContainer extends Component {
         if (this.state.selectedTab === "parkingPage"){
             return (<ParkingPage updateLastOrder = {this.submittedOrder} />);
         } else if (this.state.selectedTab === 'fetchingPage') {
-            return (<FetchingPage />);
+            return (<FetchingPage updateLastOrder = {this.submittedOrder}/>);
         } else {
             return (<LastOrderPage orderId = {this.state.lastOrder}/>);
         }
