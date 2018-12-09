@@ -26,30 +26,34 @@ class ViewPendingOrdersPage extends Component {
     render() {
         return (
             <List renderHeader={() => 'All Pending Orders'} style={{maxHeight: '200px'}}>
-                {this.props.pendingOrders.map((order) => 
-                <Item
-                    multipleLine
-                    onClick={() => {}}
-                    platform="android"
-                    key={order.id}
-                >
-                <table style={{width: '100%'}}>
-                    <tbody>
-                        <tr>
-                            <td style={{width: '50%'}}>
-                                <b>Order: {order.id}</b>
-                                <Brief>
-                                <b>CarID:</b> {order.carId} <br/>
-                                <b>Contact Number:</b> {order.phoneNumber}
-                                </Brief>
-                            </td>
-                            <td style={{width: '50%', float: 'right'}}>
-                                <Button type="primary" icon="check-circle-o" inline style={{ float: 'right'}} onClick={() => this.grabOrder(order)}>Grab!</Button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                </Item>)}
+                {this.props.pendingOrders.length > 0 ?
+                    this.props.pendingOrders.map((order) => 
+                    <Item
+                        multipleLine
+                        onClick={() => {}}
+                        platform="android"
+                        key={order.id}
+                    >
+                        <table style={{width: '100%'}}>
+                            <tbody>
+                                <tr>
+                                    <td style={{width: '50%'}}>
+                                        <b>Order: {order.id}</b>
+                                        <Brief>
+                                        <b>CarID:</b> {order.carId} <br/>
+                                        <b>Contact Number:</b> {order.phoneNumber}
+                                        </Brief>
+                                    </td>
+                                    <td style={{width: '50%', float: 'right'}}>
+                                        <Button type="primary" icon="check-circle-o" inline style={{ float: 'right'}} onClick={() => this.grabOrder(order)}>Grab!</Button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </Item>)
+                    :
+                    <h3 style={{textAlign: 'center'}}>No pending orders right now!</h3>
+                }
             </List>
         )
     }
