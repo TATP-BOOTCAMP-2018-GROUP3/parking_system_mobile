@@ -9,13 +9,14 @@ class LastOrderPage extends Component {
 
     saveAsPdf = () => {
         const input = document.getElementsByClassName("save-pdf-component")[0];
-        html2canvas(input)
+        html2canvas(input, {scale: "2"})
           .then((canvas) => {
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF("portrait", "mm", [297+16, 210]);
-            pdf.addImage(imgData, 'JPEG', -150, 0);
-            
-            pdf.save("ticket-" + this.props.orderId + ".pdf");
+            let width = canvas.width;
+            let height = canvas.height;
+            let pdf = window.innerHeight > window.innerWidth ?  new jsPDF("portrait", "mm", [height, width]) : new jsPDF("landscape", "mm", [width, height])
+            pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
+            pdf.save("ticket-" + this.props.order.id + ".pdf");
           })
         ;
     }
