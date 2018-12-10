@@ -2,23 +2,26 @@ import React, { Component } from 'react';
 import { List, WhiteSpace, WingBlank, Picker, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import ParkingOrderResource from '../resources/ParkingOrderResource';
+import ParkingLotResource from '../resources/ParkingLotResource';
 
 const Item = List.Item;
 
-const parkingLots = [
-                        {label: 'Parking Lot 1', value: 'Parking Lot 1'},
-                        {label: 'Hong Kong Science Park Parking Lot', value: 'Hong Kong Science Park Parking Lot'},
-                        {label: '南方軟件園 停車場', value: '南方軟件園 停車場'}
-                    ]
-
 class HandleParkingOrderPage extends Component {
+
+    componentDidMount() {
+        ParkingLotResource.getAll()
+        .then(res => res.json())
+        .then(res => {
+            this.props.refreshAllParkingLots(res);
+        })
+    }
 
     onSubmit = () => {
         if (this.props.form.getFieldProps('parkingLot').value === undefined){
             return;
         }
         let parkingLotId = this.props.form.getFieldProps('parkingLot').value[0];
-        ParkingOrderResource.markCompleted({...this.props.handlingOrder, parkingLot: parkingLotId})
+        ParkingOrderResource.markCompleted({...this.props.handlingOrder, parkingLotId: parkingLotId})
         .then(res => {
             this.props.updateSelectedTab('/employee/completeorder');
             window.history.pushState(null, null, "/employee/completeorder");
@@ -28,6 +31,7 @@ class HandleParkingOrderPage extends Component {
     render() {
         const { getFieldProps } = this.props.form;
         const order = this.props.handlingOrder;
+        const parkingLots = this.props.parkingLots.map(parkingLot => {return {label: parkingLot.parkingLotName, value: parkingLot.id}});
         return (
             <WingBlank size="md">
                 <WhiteSpace size="sm" />
