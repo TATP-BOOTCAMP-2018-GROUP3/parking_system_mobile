@@ -4,25 +4,34 @@ import { List, InputItem, Switch, Stepper, Slider, Radio, Checkbox, TextareaItem
 import { createForm } from 'rc-form';
 
 export default class WelcomesPageContainer extends Component {
-    // sendSimpleResponseToBackEnd = () => {
-    //     fetch("https://parking-system-backend.herokuapp.com/parkingclerks", { mode: 'cors' })
-    //         .then(res => res.json())
-    //         .then(res =>
-    //             console.log(res)
-    //         )
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            curTime: new Date().toLocaleString()
+        };
+    }
 
     directToCustomerPageContainer = () => {
         let path = "/customer";
         this.props.history.push(path);
     }
 
+    componentWillMount() {
+        setInterval(function () {
+            this.setState({
+                curTime: new Date().toLocaleString()
+            })
+        }.bind(this), 1000);
+    }
     render() {
+
         const { getFieldProps } = this.props.form;
         return (
             <div>
                 <h1>Welcome!</h1>
-                
+
+                <p>Date: {this.state.curTime}</p>
+
                 <List>
                     {/* <List>表单输入项</List> */}
                     <List>
