@@ -1,4 +1,4 @@
-const hostname = "https://parking-system-backend.herokuapp.com/";
+const hostname = "http://localhost:8080";
 const resourceName = "/parkingorders";
 
 export default {
@@ -19,7 +19,7 @@ export default {
                         headers: new Headers({
                         'Content-Type': 'application/json'
                         }),
-                        body: JSON.stringify({...order, ownedByEmployeeId: 1, status: 'In Progress'})
+                        body: JSON.stringify({...order, status: 'In Progress'})
                     }),
     markCompleted: (order) => fetch(hostname + resourceName + "/" + order.id,
                     {
