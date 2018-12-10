@@ -11,6 +11,12 @@ const mapDispatchToProps = dispatch => ({
       type: "REFRESH_PENDING_ORDERS",
       payload: data
     });
+  },
+  updateSelectedTab: tab => {
+    dispatch({
+      type: "UPDATE_SELECTED_TAB",
+      payload: tab
+    });
   }
 });
 
