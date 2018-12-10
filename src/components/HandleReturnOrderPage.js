@@ -66,6 +66,20 @@ class HandleReturnOrderPage extends Component {
                         <Item
                             multipleLine
                             onClick={() => {}}
+                            key='parkingLot'
+                        >
+                            <table style={{width: '100%'}}>
+                                <tbody>
+                                    <tr>
+                                        <td>Parking Lot: </td>
+                                        <td style={{float: 'right'}}>{order.parkingLot}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Item>
+                        <Item
+                            multipleLine
+                            onClick={() => {}}
                             key='carId'
                         >
                             <table style={{width: '100%'}}>
