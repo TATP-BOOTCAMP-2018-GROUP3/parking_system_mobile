@@ -1,5 +1,5 @@
 const hostname = "https://parking-system-backend.herokuapp.com/";
-const resourceName = "/orders";
+const resourceName = "/parkingorders";
 
 export default {
     getByStatus: (status) => fetch(hostname + resourceName + "?status=" + status, {method: 'GET', mode: 'cors'}),
