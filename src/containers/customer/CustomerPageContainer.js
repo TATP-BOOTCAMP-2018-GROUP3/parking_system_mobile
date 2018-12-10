@@ -46,6 +46,32 @@ export default class CustomerPageContainer extends Component {
                         barTintColor="white"
                     >
                         <TabBar.Item
+                            icon={<img
+                                style={{
+                                    width: '22px',
+                                    height: '22px',
+                                }}
+                                src='/images/home_icon.svg'
+                            />
+                            }
+                            selectedIcon={<img
+                                style={{
+                                    width: '22px',
+                                    height: '22px',
+                                }}
+                                src='/images/home_icon_selected.svg'
+                            />
+                            }
+                            title="Home"
+                            key="Home"
+                            selected={this.state.selectedTab === 'logoutPage'}
+                            onPress={() => {
+                                this.props.history.push('/');
+                            }}
+                        >
+                            {this.renderContent('logoutPage')}
+                        </TabBar.Item>
+                        <TabBar.Item
                             icon={
                                 <div style={{
                                     width: '22px',

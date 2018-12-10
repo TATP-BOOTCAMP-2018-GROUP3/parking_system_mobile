@@ -11,8 +11,7 @@ export default class WelcomesPageContainer extends Component {
         };
     }
 
-    directToCustomerPageContainer = () => {
-        let path = "/customer";
+    directToPage = (path) => {
         this.props.history.push(path);
     }
 
@@ -32,25 +31,9 @@ export default class WelcomesPageContainer extends Component {
 
                 <p>Date: {this.state.curTime}</p>
 
-                <List>
-                    {/* <List>表单输入项</List> */}
-                    <List>
-                        <InputItem
-                            {...getFieldProps('input3', {
-                                initialValue: 'User',
-                            })}
-                            clear
-                            placeholder="User"
-                        >User</InputItem>
-                        <InputItem
-                            {...getFieldProps('input4')}
-                            clear
-                            placeholder="请输入密码"
-                        >Password</InputItem>
-                    </List>
-                </List>
-                <Button type="primary" onClick={this.directToCustomerPageContainer}>Login</Button><WhiteSpace />
-                {/* <Button type="primary" onClick={this.sendSimpleResponseToBackEnd}>Testing for simple request from BE</Button><WhiteSpace /> */}
+                <Button type="primary" inline style={{ marginRight: '4px' }} onClick={() => {this.directToPage("/customer")}}>Customer</Button>
+
+                <Button type="primary" inline style={{ marginRight: '4px' }} onClick={() => {this.directToPage("/employeeLogin")}}>Employee</Button>
 
 
             </div>

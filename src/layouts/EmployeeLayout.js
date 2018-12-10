@@ -148,8 +148,7 @@ class MainLayout extends Component {
             key="logout"
             selected={this.props.selectedTab === '/logout'}
             onPress={() => {
-              this.props.updateSelectedTab('/logout');
-              window.history.pushState(null, null, "/login");
+              this.props.history.push('/');
             }}
             >
           </TabBar.Item>
