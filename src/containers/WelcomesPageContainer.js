@@ -4,13 +4,13 @@ import { List, InputItem, Switch, Stepper, Slider, Radio, Checkbox, TextareaItem
 import { createForm } from 'rc-form';
 
 export default class WelcomesPageContainer extends Component {
-    sendSimpleResponseToBackEnd = () => {
-        fetch("https://parking-system-backend.herokuapp.com/parkingclerks", { mode: 'cors' })
-            .then(res => res.json())
-            .then(res =>
-                console.log(res)
-            )
-    }
+    // sendSimpleResponseToBackEnd = () => {
+    //     fetch("https://parking-system-backend.herokuapp.com/parkingclerks", { mode: 'cors' })
+    //         .then(res => res.json())
+    //         .then(res =>
+    //             console.log(res)
+    //         )
+    // }
 
     directToCustomerPageContainer = () => {
         let path = "/customer";
@@ -41,7 +41,7 @@ export default class WelcomesPageContainer extends Component {
                     </List>
                 </List>
                 <Button type="primary" onClick={this.directToCustomerPageContainer}>Login</Button><WhiteSpace />
-                <Button type="primary" onClick={this.sendSimpleResponseToBackEnd}>Testing for simple request from BE</Button><WhiteSpace />
+                {/* <Button type="primary" onClick={this.sendSimpleResponseToBackEnd}>Testing for simple request from BE</Button><WhiteSpace /> */}
 
 
             </div>
