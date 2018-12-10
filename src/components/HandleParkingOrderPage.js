@@ -113,7 +113,7 @@ class HandleParkingOrderPage extends Component {
                         </Picker>
                     </List>
                     <WhiteSpace size="xl" />
-                    <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit} disabled={!this.props.form.getFieldProps('parkingLot').value}>>Done !</Button>
+                    <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit} disabled={!this.props.form.getFieldProps('parkingLot').value}>Done !</Button>
                 </form>
             </WingBlank>
         )
