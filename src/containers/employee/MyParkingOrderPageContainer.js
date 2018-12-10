@@ -26,6 +26,12 @@ const mapDispatchToProps = dispatch => ({
       payload: order
     });
   },
+  handleUpdatePopupMsg: msg => {
+    dispatch({
+      type: "UPDATE_POPUP_MSG",
+      payload: msg
+    });
+  },
 });
 
 connect(mapStateToProps, mapDispatchToProps)(MyParkingOrderPage)

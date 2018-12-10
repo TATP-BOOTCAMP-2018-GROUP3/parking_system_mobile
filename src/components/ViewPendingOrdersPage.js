@@ -25,7 +25,7 @@ class ViewPendingOrdersPage extends Component {
                 this.props.handleUpdatePopupMsg(
                     {
                         "title":"Successful Grabbed",
-                        "body": "OrderID: " + order.id + ": Car id:" + order.carId
+                        "body": "Order ID: " + order.id + ": Car ID:" + order.carId
                     }
                 )
                 this.props.updateSelectedTab('/employee/grabbedparkingorders');

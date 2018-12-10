@@ -3,7 +3,7 @@ const initialState = {
   pendingOrders: [],
   inProgressOrders: [],
   handlingOrder: {},
-  popupMsg: {}
+  popupMsg: null
 };
 
 export default (state = initialState, { type, payload }) => {

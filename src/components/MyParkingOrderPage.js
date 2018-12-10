@@ -10,8 +10,9 @@ const Brief = Item.Brief;
 class MyParkingOrderPage extends Component {
     componentDidMount() {
         this.getAllInProgressParkingOrders();
-        if (this.props.popupMsg.body) {
+        if (this.props.popupMsg) {
             this.createNotification('success', this.props.popupMsg)
+            this.props.handleUpdatePopupMsg(null)
         }
     }
 
