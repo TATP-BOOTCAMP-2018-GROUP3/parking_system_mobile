@@ -64,7 +64,7 @@ export default class CustomerPageContainer extends Component {
                             }
                             title="Park"
                             key="Park"
-                            dot
+                            // dot
                             selected={this.state.selectedTab === 'parkingPage'}
                             onPress={() => {
                                 this.setState({
