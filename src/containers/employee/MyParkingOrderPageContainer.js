@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
   selectedTab: state.EmployeeReducer.selectedTab,
-  inProgressOrders: state.EmployeeReducer.inProgressOrders
+  inProgressOrders: state.EmployeeReducer.inProgressOrders,
+  popupMsg: state.EmployeeReducer.popupMsg  
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -23,6 +24,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "UPDATE_HANDLING_ORDER",
       payload: order
+    });
+  },
+  handleUpdatePopupMsg: msg => {
+    dispatch({
+      type: "UPDATE_POPUP_MSG",
+      payload: msg
     });
   },
 });

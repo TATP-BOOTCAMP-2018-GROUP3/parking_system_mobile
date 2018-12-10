@@ -17,7 +17,13 @@ const mapDispatchToProps = dispatch => ({
       type: "UPDATE_SELECTED_TAB",
       payload: tab
     });
-  }
+  },
+  handleUpdatePopupMsg: msg => {
+    dispatch({
+      type: "UPDATE_POPUP_MSG",
+      payload: msg
+    });
+  },
 });
 
 connect(mapStateToProps, mapDispatchToProps)(ViewPendingOrdersPage)
