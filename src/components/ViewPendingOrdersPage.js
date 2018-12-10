@@ -21,7 +21,13 @@ class ViewPendingOrdersPage extends Component {
     grabOrder(order) {
         ParkingOrderResource.grab(order)
             .then(res => this.getAllPendingOrders())
-            .then(res => {
+            .then(res => {  
+                this.props.handleUpdatePopupMsg(
+                    {
+                        "title":"Successful Grabbed",
+                        "body": "OrderID: " + order.id + ": Car id:" + order.carId
+                    }
+                )
                 this.props.updateSelectedTab('/employee/grabbedparkingorders');
                 window.history.pushState(null, null, "/employee/grabbedparkingorders");
             }
