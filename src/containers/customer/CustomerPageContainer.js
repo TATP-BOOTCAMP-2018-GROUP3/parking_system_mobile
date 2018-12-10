@@ -4,6 +4,7 @@ import './CustomerPageContainer.css'
 import FetchingPage from './FetchingPage';
 import ParkingPage from './ParkingPage';
 import LastOrderPage from './LastOrderPage';
+import ParkingOrderResource from '../../resources/ParkingOrderResource';
 
 const PlaceHolder = ({ className = '', ...restProps }) => (
     <div className={`${className} placeholder`} {...restProps}>Block</div>
@@ -14,14 +15,14 @@ export default class CustomerPageContainer extends Component {
         super(props);
         this.state = {
             selectedTab: 'parkingPage',
-            lastOrder: ""
+            lastOrder: {}
         };
     }
 
-    submittedOrder = (id) => {
+    submittedOrder = (order) => {
         this.setState({
             selectedTab: 'lastOrder',
-            lastOrder: id
+            lastOrder: order
         })
     }
 
@@ -31,7 +32,7 @@ export default class CustomerPageContainer extends Component {
         } else if (this.state.selectedTab === 'fetchingPage') {
             return (<FetchingPage updateLastOrder={this.submittedOrder} />);
         } else {
-            return (<LastOrderPage orderId={this.state.lastOrder} />);
+            return (<LastOrderPage order={this.state.lastOrder} />);
         }
     }
 
