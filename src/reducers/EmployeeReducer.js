@@ -1,5 +1,6 @@
 const initialState = {
   selectedTab: "",
+  parkingLots: [],
   pendingOrders: [],
   inProgressOrders: [],
   handlingOrder: {},
@@ -13,6 +14,11 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         selectedTab: payload
       }
+    case "REFRESH_ALL_PARKING_LOTS":
+      return {
+        ...state,
+        parkingLots: payload
+      };
     case "REFRESH_PENDING_ORDERS":
       return {
         ...state,
