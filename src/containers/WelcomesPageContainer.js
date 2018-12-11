@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import 'antd-mobile/dist/antd-mobile.css';
-import { List, InputItem, Switch, Stepper, Slider, Radio, Checkbox, TextareaItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
-import { createForm } from 'rc-form';
-import {Icon} from 'antd-mobile';
+import { WingBlank, WhiteSpace, Button } from 'antd-mobile';
 
 export default class WelcomesPageContainer extends Component {
     constructor(props) {
@@ -24,8 +22,6 @@ export default class WelcomesPageContainer extends Component {
         }.bind(this), 1000);
     }
     render() {
-
-        const { getFieldProps } = this.props.form;
 
         return (
             <div>
@@ -53,7 +49,7 @@ export default class WelcomesPageContainer extends Component {
                                 height: '65px'
                             }}
                         />
-                        Customer
+                        Customer Entry
                  </Button>
                 </WingBlank>
 
@@ -64,9 +60,9 @@ export default class WelcomesPageContainer extends Component {
                         style={{
                             height: '70px'
                         }}
-                        onClick={() => {this.directToPage("/employeeLogin")}}>
+                        onClick={() => {this.directToPage("/employeelogin")}}>
                         <img src='/images/parking_boy.svg'/>
-                        Employee
+                        Employee Entry
                     </Button>
                 </WingBlank>
                 
@@ -77,4 +73,3 @@ export default class WelcomesPageContainer extends Component {
         )
     }
 }
-WelcomesPageContainer = createForm()(WelcomesPageContainer);

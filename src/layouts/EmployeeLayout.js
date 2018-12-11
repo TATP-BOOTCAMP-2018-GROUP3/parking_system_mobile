@@ -11,6 +11,13 @@ import CompleteOrderPageContainer from '../containers/employee/CompleteOrderPage
 
 class MainLayout extends Component {
 
+  componentWillMount(){
+    if (localStorage.getItem('AUTH') === null && localStorage.getItem('ROLE') === null) {
+      this.props.history.push('/employeelogin');
+      return;
+    }
+  }
+
   componentDidMount(){
     this.props.updateSelectedTab(window.location.pathname);
   }
@@ -149,6 +156,7 @@ class MainLayout extends Component {
             key="logout"
             selected={this.props.selectedTab === '/logout'}
             onPress={() => {
+              localStorage.clear();
               this.props.history.push('/');
             }}
             >
