@@ -22,6 +22,9 @@ class FetchingPage extends Component {
                 this.props.updateLastOrder(res);
             });
         })
+        .catch(res => {
+            console.log(res)
+        });
     }
 
     render() {

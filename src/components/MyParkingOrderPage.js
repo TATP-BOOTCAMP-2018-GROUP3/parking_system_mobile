@@ -10,7 +10,7 @@ const Brief = Item.Brief;
 class MyParkingOrderPage extends Component {
     componentDidMount() {
         this.getAllInProgressParkingOrders();
-        if (this.props.popupMsg && this.props.popupMsg.type === 'success') {
+        if (this.props.popupMsg && this.props.popupMsg.type != 'null') {
             this.createNotification(this.props.popupMsg.type, this.props.popupMsg)
             this.props.handleUpdatePopupMsg(null)
         }
@@ -25,11 +25,11 @@ class MyParkingOrderPage extends Component {
                 NotificationManager.success(this.props.popupMsg.body, this.props.popupMsg.title);
                 break;
             case 'warning':
-                NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+                NotificationManager.warning(this.props.popupMsg.body, this.props.popupMsg.title, 3000);
                 break;
             case 'error':
-                NotificationManager.error('Error message', 'Click me!', 5000, () => {
-                    alert('callback');
+                NotificationManager.error(this.props.popupMsg.body, this.props.popupMsg.title, 5000, () => {
+                    // alert('callback');
                 });
                 break;
         };
