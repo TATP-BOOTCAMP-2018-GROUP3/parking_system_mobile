@@ -11,7 +11,8 @@ class ViewPendingOrdersPage extends Component {
         this.getAllPendingOrders();
     }
 
-    createNotification = (type, popupMsg) => {
+    createNotification = (popupMsg) => {
+        let type = popupMsg.type
         switch (type) {
             case 'info':
                 NotificationManager.info('Info message');
@@ -28,11 +29,12 @@ class ViewPendingOrdersPage extends Component {
                 });
                 break;
         };
+        popupMsg = null;
     }
 
     getAllPendingOrders() {
         if (this.props.popupMsg && this.props.popupMsg.type != 'null') {
-            this.createNotification(this.props.popupMsg.type, this.props.popupMsg)
+            this.createNotification(this.props.popupMsg)
             this.props.handleUpdatePopupMsg(null)
         }
         ParkingOrderResource.getByStatus("Pending")
@@ -74,7 +76,8 @@ class ViewPendingOrdersPage extends Component {
             })
     }
 
-    createNotification = (type, popupMsg) => {
+    createNotification = (popupMsg) => {
+        let type = popupMsg.type
         switch (type) {
             case 'info':
                 NotificationManager.info('Info message');

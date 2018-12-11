@@ -11,24 +11,25 @@ class MyParkingOrderPage extends Component {
     componentDidMount() {
         this.getAllInProgressParkingOrders();
         if (this.props.popupMsg && this.props.popupMsg.type != 'null') {
-            this.createNotification(this.props.popupMsg.type, this.props.popupMsg)
+            this.createNotification(this.props.popupMsg)
             this.props.handleUpdatePopupMsg(null)
         }
     }
 
-    createNotification = (type, popupMsg) => {
+    createNotification = (popupMsg) => {
+        let type = popupMsg.type
         switch (type) {
             case 'info':
                 NotificationManager.info('Info message');
                 break;
             case 'success':
-                NotificationManager.success(this.props.popupMsg.body, this.props.popupMsg.title);
+                NotificationManager.success(popupMsg.body, popupMsg.title);
                 break;
             case 'warning':
-                NotificationManager.warning(this.props.popupMsg.body, this.props.popupMsg.title, 3000);
+                NotificationManager.warning(popupMsg.body, popupMsg.title, 3000);
                 break;
             case 'error':
-                NotificationManager.error(this.props.popupMsg.body, this.props.popupMsg.title, 5000, () => {
+                NotificationManager.error(popupMsg.body, popupMsg.title, 5000, () => {
                     // alert('callback');
                 });
                 break;
