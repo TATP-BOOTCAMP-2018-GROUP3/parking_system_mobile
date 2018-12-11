@@ -2,7 +2,8 @@ import HandleReturnOrderPage from '../../components/HandleReturnOrderPage.js'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-    handlingOrder: state.EmployeeReducer.handlingOrder
+  employeeId: state.LoginReducer.employeeId,
+  handlingOrder: state.EmployeeReducer.handlingOrder
 })
 
 const mapDispatchToProps = dispatch => ({

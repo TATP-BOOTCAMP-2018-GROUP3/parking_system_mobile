@@ -2,8 +2,9 @@ import HandleParkingOrderPage from '../../components/HandleParkingOrderPage.js'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-    handlingOrder: state.EmployeeReducer.handlingOrder,
-    parkingLots: state.EmployeeReducer.parkingLots
+  employeeId: state.LoginReducer.employeeId,
+  handlingOrder: state.EmployeeReducer.handlingOrder,
+  parkingLots: state.EmployeeReducer.parkingLots
 })
 
 const mapDispatchToProps = dispatch => ({

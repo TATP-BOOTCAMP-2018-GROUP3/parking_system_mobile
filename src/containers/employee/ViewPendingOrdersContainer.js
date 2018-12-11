@@ -2,6 +2,7 @@ import ViewPendingOrdersPage from '../../components/ViewPendingOrdersPage.js'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
+  employeeId: state.LoginReducer.employeeId,
   pendingOrders: state.EmployeeReducer.pendingOrders,
   popupMsg: state.EmployeeReducer.popupMsg  
 })

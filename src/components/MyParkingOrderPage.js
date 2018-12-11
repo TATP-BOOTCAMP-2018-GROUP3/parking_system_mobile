@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { List, Tag } from 'antd-mobile';
-import ParkingOrderResource from '../resources/ParkingOrderResource';
+import ParkingClerkResource from '../resources/ParkingClerkResource';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
@@ -37,10 +37,10 @@ class MyParkingOrderPage extends Component {
     }
 
     getAllInProgressParkingOrders() {
-        ParkingOrderResource.getByStatus("In Progress")
+        ParkingClerkResource.getOwnedParkingOrders(this.props.employeeId)
             .then(res => res.json())
             .then(res => {
-                this.props.refreshInProgressParkingOrder(res);
+                this.props.refreshInProgressParkingOrder(res.sort(this.sortInProgressOrder));
             })
             .catch(res => console.log(res));
     }
@@ -52,6 +52,16 @@ class MyParkingOrderPage extends Component {
         this.props.handleSelectedOrder(order);
         this.props.updateSelectedTab(newPathName);
     }
+
+    sortInProgressOrder = ((a, b) => {
+        if (a.status < b.status)
+            return 1;
+        else if (a.status > b.status)
+            return -1;
+        else {
+            return (a.id < b.id)
+        }
+    })
 
     render() {
 
@@ -90,7 +100,13 @@ class MyParkingOrderPage extends Component {
                                                 <td>Contact Number: {order.phoneNumber}</td>
                                             </tr>
                                             <tr>
-                                                <td><Tag style={{ backgroundColor: '#fbbd08', color: 'white', borderColor: '#fbbd08', lineHeight: '1.5' }}> {order.status} </Tag></td>
+                                                <td>
+                                                    { order.status === 'In Progress' ?
+                                                        <Tag style={{ backgroundColor: '#fbbd08', color: 'white', borderColor: '#fbbd08', lineHeight: '1.5' }}> {order.status} </Tag>
+                                                        :
+                                                        <Tag style={{ backgroundColor: '#21ba45', color: 'white', borderColor: '#21ba45', lineHeight: '1.5' }}> {order.status} </Tag>
+                                                    }
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

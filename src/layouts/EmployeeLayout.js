@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TabBar } from 'antd-mobile'; 
 import ParkingOrderResource from '../resources/ParkingOrderResource';
 import ReturnOrderResource from '../resources/ReturnOrderResource';
+import ParkingClerkResource from '../resources/ParkingClerkResource';
 import ViewPendingOrdersContainer from '../containers/employee/ViewPendingOrdersContainer';
 import MyParkingOrderPageContainer from '../containers/employee/MyParkingOrderPageContainer';
 import MyReturnOrderPageContainer from '../containers/employee/MyReturnOrderPageContainer';
@@ -89,7 +90,7 @@ class MainLayout extends Component {
             onPress={() => {
               this.props.updateSelectedTab('/employee/grabbedparkingorders');
               window.history.pushState(null, null, "/employee/grabbedparkingorders");
-              ParkingOrderResource.getByStatus("In Progress")
+              ParkingClerkResource.getOwnedParkingOrders(this.props.employeeId)
               .then(res => res.json())
               .then(res => {
                   this.props.refreshInProgressParkingOrder(res);

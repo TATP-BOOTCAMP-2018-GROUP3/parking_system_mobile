@@ -2,9 +2,11 @@ import MyParkingOrderPage from '../../components/MyParkingOrderPage.js'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
+  employeeId: state.LoginReducer.employeeId,
   selectedTab: state.EmployeeReducer.selectedTab,
   inProgressOrders: state.EmployeeReducer.inProgressOrders,
-  popupMsg: state.EmployeeReducer.popupMsg  
+  popupMsg: state.EmployeeReducer.popupMsg,
+  employeeId: state.EmployeeReducer.employeeId
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -30,6 +32,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "UPDATE_POPUP_MSG",
       payload: msg
+    });
+  },
+  refreshEmployeeId: id => {
+    dispatch({
+      type: "REFRES_EMPLOYEE_ID",
+      payload: id
     });
   },
 });

@@ -2,6 +2,7 @@ import MyReturnOrderPage from '../../components/MyReturnOrderPage.js'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
+  employeeId: state.LoginReducer.employeeId,
   selectedTab: state.EmployeeReducer.selectedTab,
   pendingOrders: state.EmployeeReducer.pendingOrders
 })

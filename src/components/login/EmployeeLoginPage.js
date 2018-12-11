@@ -4,7 +4,7 @@ import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import AuthResource from '../../resources/AuthResource';
 
-export default class EmployeeLoginPage extends Component {
+class EmployeeLoginPage extends Component {
     constructor(props) {
         super(props);
     }
@@ -80,3 +80,4 @@ export default class EmployeeLoginPage extends Component {
     }
 }
 EmployeeLoginPage = createForm()(EmployeeLoginPage);
+export default EmployeeLoginPage;

@@ -2,6 +2,7 @@ import CompleteOrderPage from '../../components/CompleteOrderPage.js'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
+    employeeId: state.LoginReducer.employeeId,
     handlingOrder: state.EmployeeReducer.handlingOrder
 })
 
