@@ -1,8 +1,9 @@
-const hostname = "https://parking-system-backend.herokuapp.com/";
+const hostname = "https://parking-system-backend.herokuapp.com";
 const resourceName = "/parkingorders";
 
 export default {
     getByStatus: (status) => fetch(hostname + resourceName + "?status=" + status, {method: 'GET', mode: 'cors'}),
+    getById: (id) => fetch(hostname + resourceName + "/" + id, {method: 'GET', mode: 'cors'}),
     add: (order) => fetch(hostname + resourceName,
                     {
                         method: 'POST',
@@ -19,7 +20,7 @@ export default {
                         headers: new Headers({
                         'Content-Type': 'application/json'
                         }),
-                        body: JSON.stringify({...order, ownedByEmployeeId: 1, status: 'In Progress'})
+                        body: JSON.stringify({...order, status: 'In Progress'})
                     }),
     markCompleted: (order) => fetch(hostname + resourceName + "/" + order.id,
                     {
@@ -31,5 +32,5 @@ export default {
                         body: JSON.stringify({...order, status: 'Completed'})
                     })
   
-  }
+}
   

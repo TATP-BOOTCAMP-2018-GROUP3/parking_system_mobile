@@ -3,6 +3,7 @@ const resourceName = "/returnorders";
 
 export default {
     getByStatus: (status) => fetch(hostname + resourceName + "?status=" + status, {method: 'GET', mode: 'cors'}),
+    getById: (id) => fetch(hostname + resourceName + "/" + id, {method: 'GET', mode: 'cors'}),
     add: (order) => fetch(hostname + resourceName,
                     {
                         method: 'POST',
@@ -22,5 +23,5 @@ export default {
                         body: JSON.stringify({...order, status: 'Completed'})
                     })
   
-  }
+}
   

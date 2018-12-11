@@ -16,7 +16,11 @@ class ParkingPage extends Component {
         .then(res => {
             let location = res.headers.get('Location');
             let id = location.split('/')[2];
-            this.props.updateLastOrder(id);
+            ParkingOrderResource.getById(id)
+            .then(res => res.json())
+            .then(res => {
+                this.props.updateLastOrder(res);
+            });
         })
         .catch(res => console.log(res));
     }

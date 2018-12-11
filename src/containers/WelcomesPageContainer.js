@@ -29,46 +29,48 @@ export default class WelcomesPageContainer extends Component {
 
         return (
             <div>
-                <img src='/images/parkingsmart_logo.svg'
-                    style={{
-                        width: '400px',
-                        height: '200px',
-                    }}
-                />
-                
+                <WhiteSpace size="md" />
 
-                <span>&nbsp;&nbsp;</span>
-
-                <span>&nbsp;&nbsp;</span>
-
-                <Button
-                    style={{
-                        height: '70px'
-                    }}
-                    onClick={() => {this.directToPage("/customer")}}>
-                    <img src='/images/customer.svg'
+                <WingBlank size="md" style={{textAlign: 'center'}}>
+                    <img src='/images/parkingsmart_logo.svg'
                         style={{
-                            width: '65px',
-                            height: '65px'
+                            width: '80%'
                         }}
                     />
-                    Customer
-                </Button>
-
-                <span>&nbsp;&nbsp;</span>
+                </WingBlank>
                 
-                <span>&nbsp;&nbsp;</span>
+                <WhiteSpace size="md" />
 
-                <Button 
-                    style={{
-                        height: '70px'
-                    }}
-                    onClick={() => {this.directToPage("/employeeLogin")}}>
-                    <img src='/images/parking_boy.svg'/>
-                    Employee
-                </Button>
+                <WingBlank size="md">
+                    <Button
+                        style={{
+                            height: '70px'
+                        }}
+                        onClick={() => {this.directToPage("/customer")}}>
+                        <img src='/images/customer.svg'
+                            style={{
+                                width: '65px',
+                                height: '65px'
+                            }}
+                        />
+                        Customer
+                 </Button>
+                </WingBlank>
 
-                <span>&nbsp;&nbsp;</span>
+                <WhiteSpace size="md" />
+
+                <WingBlank size="md">
+                    <Button 
+                        style={{
+                            height: '70px'
+                        }}
+                        onClick={() => {this.directToPage("/employeeLogin")}}>
+                        <img src='/images/parking_boy.svg'/>
+                        Employee
+                    </Button>
+                </WingBlank>
+                
+                <WhiteSpace size="md" />
                 
                 <p>Date: {this.state.curTime}</p>
             </div>

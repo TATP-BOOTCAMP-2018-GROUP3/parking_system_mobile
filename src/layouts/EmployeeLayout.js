@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom'
 import { TabBar } from 'antd-mobile'; 
 import ParkingOrderResource from '../resources/ParkingOrderResource';
 import ReturnOrderResource from '../resources/ReturnOrderResource';

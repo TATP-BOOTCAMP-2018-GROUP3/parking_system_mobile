@@ -2,7 +2,8 @@ import HandleParkingOrderPage from '../../components/HandleParkingOrderPage.js'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-    handlingOrder: state.EmployeeReducer.handlingOrder
+    handlingOrder: state.EmployeeReducer.handlingOrder,
+    parkingLots: state.EmployeeReducer.parkingLots
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -10,6 +11,12 @@ const mapDispatchToProps = dispatch => ({
       dispatch({
         type: "UPDATE_SELECTED_TAB",
         payload: tab
+      });
+    },
+    refreshAllParkingLots: parkingLots => {
+      dispatch({
+        type: "REFRESH_ALL_PARKING_LOTS",
+        payload: parkingLots
       });
     }
   });

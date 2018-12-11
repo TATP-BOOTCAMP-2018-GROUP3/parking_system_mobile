@@ -16,7 +16,11 @@ class FetchingPage extends Component {
         .then(res => {
             let location = res.headers.get('Location');
             let id = location.split('/')[2];
-            this.props.updateLastOrder(id);
+            ReturnOrderResource.getById(id)
+            .then(res => res.json())
+            .then(res => {
+                this.props.updateLastOrder(res);
+            });
         })
     }
 
