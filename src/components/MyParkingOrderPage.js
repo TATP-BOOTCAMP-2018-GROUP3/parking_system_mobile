@@ -3,6 +3,7 @@ import { List, Tag } from 'antd-mobile';
 import ParkingClerkResource from '../resources/ParkingClerkResource';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import { sortInProgressOrder } from'../util/GeneralUtil';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -40,7 +41,7 @@ class MyParkingOrderPage extends Component {
         ParkingClerkResource.getOwnedParkingOrders(this.props.employeeId)
             .then(res => res.json())
             .then(res => {
-                this.props.refreshInProgressParkingOrder(res.sort(this.sortInProgressOrder));
+                this.props.refreshInProgressParkingOrder(res.sort(sortInProgressOrder));
             })
             .catch(res => console.log(res));
     }
@@ -52,16 +53,6 @@ class MyParkingOrderPage extends Component {
         this.props.handleSelectedOrder(order);
         this.props.updateSelectedTab(newPathName);
     }
-
-    sortInProgressOrder = ((a, b) => {
-        if (a.status < b.status)
-            return 1;
-        else if (a.status > b.status)
-            return -1;
-        else {
-            return (a.id < b.id)
-        }
-    })
 
     render() {
 

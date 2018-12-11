@@ -9,6 +9,7 @@ import MyReturnOrderPageContainer from '../containers/employee/MyReturnOrderPage
 import HandleParkingOrderPageContainer from '../containers/employee/HandleParkingOrderPageContainer';
 import HandleReturnOrderPageContainer from '../containers/employee/HandleReturnOrderPageContainer';
 import CompleteOrderPageContainer from '../containers/employee/CompleteOrderPageContainer';
+import { sortInProgressOrder } from'../util/GeneralUtil';
 
 class MainLayout extends Component {
 
@@ -93,7 +94,7 @@ class MainLayout extends Component {
               ParkingClerkResource.getOwnedParkingOrders(this.props.employeeId)
               .then(res => res.json())
               .then(res => {
-                  this.props.refreshInProgressParkingOrder(res);
+                  this.props.refreshInProgressParkingOrder(res.sort(sortInProgressOrder));
               })
               .catch(res => console.log(res));
             }}
