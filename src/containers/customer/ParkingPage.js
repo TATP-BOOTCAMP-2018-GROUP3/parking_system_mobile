@@ -10,6 +10,7 @@ class ParkingPage extends Component {
         let carId = this.props.form.getFieldProps('carId').value;
         let phoneNumber = this.props.form.getFieldProps('phoneNumber').value;
         if (carId === undefined || phoneNumber === undefined){
+            alert("Please enter the data")
             return;
         }
         ParkingOrderResource.add({carId: carId, phoneNumber: phoneNumber})
@@ -59,7 +60,7 @@ class ParkingPage extends Component {
                         </InputItem>
                     </List>
                     <WhiteSpace size="xl" />
-                    <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit}>Submit</Button>
+                    <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit}  disabled = {(!this.props.form.getFieldProps('carId').value) || (!this.props.form.getFieldProps('phoneNumber').value)}>Submit</Button>
                 </form>
             </WingBlank>
         )

@@ -101,7 +101,7 @@ class FetchingPage extends Component {
                         </InputItem>
                         </List>
                         <WhiteSpace size="xl" />
-                        <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit}>Submit</Button>
+                        <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit} disabled = {(!this.props.form.getFieldProps('parkingOrderId').value) || (!this.props.form.getFieldProps('phoneNumber').value)}>Submit</Button>
                     </form>
                 </WingBlank>
             </div>
