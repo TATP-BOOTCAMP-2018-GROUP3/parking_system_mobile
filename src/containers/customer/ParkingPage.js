@@ -18,6 +18,7 @@ class ParkingPage extends Component {
             let id = location.split('/')[2];
             this.props.updateLastOrder(id);
         })
+        .catch(res => console.log(res));
     }
 
     render() {

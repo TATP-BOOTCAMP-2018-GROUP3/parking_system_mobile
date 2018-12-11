@@ -51,7 +51,8 @@ class MainLayout extends Component {
               .then(res => res.json())
               .then(res => {
                   this.props.refreshPendingOrders(res);
-              });
+              })
+              .catch(res => console.log(res));;
             }}
           >
             {
@@ -86,7 +87,8 @@ class MainLayout extends Component {
               .then(res => res.json())
               .then(res => {
                   this.props.refreshInProgressParkingOrder(res);
-              });
+              })
+              .catch(res => console.log(res));
             }}
           >
             {

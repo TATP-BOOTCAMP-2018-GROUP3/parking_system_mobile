@@ -10,13 +10,13 @@ const Brief = Item.Brief;
 class MyParkingOrderPage extends Component {
     componentDidMount() {
         this.getAllInProgressParkingOrders();
-        if (this.props.popupMsg) {
-            this.createNotification('success', this.props.popupMsg)
+        if (this.props.popupMsg && this.props.popupMsg.type === 'success') {
+            this.createNotification(this.props.popupMsg.type, this.props.popupMsg)
             this.props.handleUpdatePopupMsg(null)
         }
     }
 
-    createNotification = (type) => {
+    createNotification = (type, popupMsg) => {
         switch (type) {
             case 'info':
                 NotificationManager.info('Info message');
@@ -40,7 +40,8 @@ class MyParkingOrderPage extends Component {
             .then(res => res.json())
             .then(res => {
                 this.props.refreshInProgressParkingOrder(res);
-            });
+            })
+            .catch(res => console.log(res));
     }
 
     handleOrder(order) {

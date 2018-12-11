@@ -18,11 +18,12 @@ class HandleParkingOrderPage extends Component {
             return;
         }
         let parkingLotId = this.props.form.getFieldProps('parkingLot').value[0];
-        ParkingOrderResource.markCompleted({...this.props.handlingOrder, parkingLot: parkingLotId})
+        ParkingOrderResource.markCompleted({...this.props.handlingOrder, parkingLotId: parkingLotId})
         .then(res => {
             this.props.updateSelectedTab('/employee/completeorder');
             window.history.pushState(null, null, "/employee/completeorder");
-        });
+        })
+        .catch(res => console.log(res));
     }
 
     render() {

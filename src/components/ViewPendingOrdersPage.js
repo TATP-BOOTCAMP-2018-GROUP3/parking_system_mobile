@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { List, Button } from 'antd-mobile';
 import ParkingOrderResource from '../resources/ParkingOrderResource';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -15,7 +16,8 @@ class ViewPendingOrdersPage extends Component {
             .then(res => res.json())
             .then(res => {
                 this.props.refreshPendingOrders(res);
-            });
+            })
+            .catch(res => console.log(res));
     }
 
     grabOrder(order) {
@@ -24,15 +26,46 @@ class ViewPendingOrdersPage extends Component {
             .then(res => {  
                 this.props.handleUpdatePopupMsg(
                     {
+                        "type":"success",
                         "title":"Successful Grabbed",
                         "body": "Order ID: " + order.id + ": Car ID:" + order.carId
                     }
                 )
                 this.props.updateSelectedTab('/employee/grabbedparkingorders');
                 window.history.pushState(null, null, "/employee/grabbedparkingorders");
-            }
-            );
+            })
+            .catch((rej) => {
+                console.log(rej);
+                this.props.handleUpdatePopupMsg(
+                    {
+                        "type": "error",
+                        "title": "Failed to Grab",
+                        "body": "Order ID: " + order.id + ": Car ID:" + order.carId
+                    }
+                )
+                this.createNotification('error', this.props.popupMsg)
+                this.props.handleUpdatePopupMsg(null)
 
+            })
+        }
+
+    createNotification = (type, popupMsg) => {
+        switch (type) {
+            case 'info':
+                NotificationManager.info('Info message');
+                break;
+            case 'success':
+                NotificationManager.success(popupMsg.body, popupMsg.title);
+                break;
+            case 'warning':
+                NotificationManager.warning(popupMsg.body, popupMsg.title, 3000);
+                break;
+            case 'error':
+                NotificationManager.error(popupMsg.body, popupMsg.title, 5000, () => {
+                    alert('callback');
+                });
+                break;
+        };
     }
 
     render() {
