@@ -9,6 +9,9 @@ const Item = List.Item;
 class HandleParkingOrderPage extends Component {
 
     componentDidMount() {
+        if (localStorage.getItem('AUTH') === null && localStorage.getItem('ROLE') === null) {
+          return;
+        }
         ParkingLotResource.getAll()
         .then(res => res.json())
         .then(res => {
