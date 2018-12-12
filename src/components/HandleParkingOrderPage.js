@@ -39,6 +39,7 @@ class HandleParkingOrderPage extends Component {
         console.log(this.props.parkingLots)
         const parkingLots = this.props.parkingLots
             .filter(parkingLot => {return (employeeId === parkingLot.employee_id)})
+            .filter(parkingLot => {return (parkingLot.availablePositionCount > 0)})
             .map(parkingLot => {
                 return {
                     label: parkingLot.parkingLotName + ": (" + parkingLot.availablePositionCount + "/" + parkingLot.capacity + ")",
