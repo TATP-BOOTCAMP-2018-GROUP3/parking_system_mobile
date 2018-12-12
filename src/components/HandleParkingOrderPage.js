@@ -38,6 +38,7 @@ class HandleParkingOrderPage extends Component {
         const employeeId = localStorage.getItem('ID')
         console.log(this.props.parkingLots)
         const parkingLots = this.props.parkingLots
+            .filter(parkingLot => {return (employeeId === parkingLot.employee_id)})
             .map(parkingLot => {
                 return {
                     label: parkingLot.parkingLotName + ": (" + parkingLot.availablePositionCount + "/" + parkingLot.capacity + ")",
