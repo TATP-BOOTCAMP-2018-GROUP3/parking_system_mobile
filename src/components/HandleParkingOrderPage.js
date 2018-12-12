@@ -35,7 +35,16 @@ class HandleParkingOrderPage extends Component {
     render() {
         const { getFieldProps } = this.props.form;
         const order = this.props.handlingOrder;
-        const parkingLots = this.props.parkingLots.map(parkingLot => {return {label: parkingLot.parkingLotName, value: parkingLot.id}});
+        const employeeId = localStorage.getItem('ID')
+        console.log(this.props.parkingLots)
+        const parkingLots = this.props.parkingLots
+            .map(parkingLot => {
+                return {
+                    label: parkingLot.parkingLotName + ": (" + parkingLot.availablePositionCount + "/" + parkingLot.capacity + ")",
+                    value: parkingLot.id
+                }
+            });
+
         return (
             <WingBlank size="md">
                 <WhiteSpace size="sm" />
