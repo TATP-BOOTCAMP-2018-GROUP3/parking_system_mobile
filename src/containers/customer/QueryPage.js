@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, WhiteSpace, WingBlank, InputItem, Button, Card } from 'antd-mobile';
+import { List, WhiteSpace, WingBlank, InputItem, Button, Card, Modal } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import ParkingOrderResource from '../../resources/ParkingOrderResource';
 import './QueryPage.css'
@@ -67,20 +67,20 @@ class QueryPage extends Component {
                         <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit} disabled={(!this.props.form.getFieldProps('parkingOrderId').value)}>Search</Button>
                     </form>
 
+                    <Modal
+                        visible={(this.state.result!=false)}
+                        transparent
+                        maskClosable={false}
+                        onClose={() =>  { this.setState({result:false})} }
+                        title="Query Result"
+                        footer={[{ text: 'Ok', onPress: () => { this.setState({result:false})} }]}
+                        wrapProps={{ onTouchStart: this.onWrapTouchStart }}
+                    >
+                        <div style={{ height: 100, overflow: 'scroll' }}>
+                            {this.state.result}
+                        </div>
+                    </Modal>
 
-                    <div className={(this.state.result===false) ? 'hidden' : ''}>
-                    
-                        <Card >
-                            <Card.Header
-                                title="Query result"
-                            />
-                            <Card.Body>
-                                <div>{this.state.result}</div>
-                            </Card.Body>
-
-                        </Card>
-                    </div>
-                    
                 </WingBlank>
             </div>
         )
