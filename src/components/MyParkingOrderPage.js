@@ -61,7 +61,7 @@ class MyParkingOrderPage extends Component {
 
                 <NotificationContainer />
 
-                <List renderHeader={() => 'Grabbed Parking Orders'} style={{ maxHeight: '200px' }}>
+                <List renderHeader={() => 'User: ' + localStorage.USERNAME + ' - ' + 'Grabbed Parking Orders'} style={{ maxHeight: '200px' }}>
                     {this.props.inProgressOrders.length > 0 ?
                         this.props.inProgressOrders.map((order) =>
                             <Item

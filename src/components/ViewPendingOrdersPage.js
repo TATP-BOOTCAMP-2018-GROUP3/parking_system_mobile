@@ -101,7 +101,7 @@ class ViewPendingOrdersPage extends Component {
             <div>
                 <NotificationContainer />
 
-                <List renderHeader={() => 'All Pending Orders'} style={{ maxHeight: '200px' }}>
+                <List renderHeader={() => 'User: ' + localStorage.USERNAME + ' - ' + 'All Pending Orders'} style={{ maxHeight: '200px' }}>
                     {this.props.pendingOrders.length > 0 ?
                         this.props.pendingOrders.map((order) =>
                             <Item
