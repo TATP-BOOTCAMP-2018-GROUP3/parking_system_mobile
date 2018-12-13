@@ -35,8 +35,7 @@ class HandleParkingOrderPage extends Component {
     render() {
         const { getFieldProps } = this.props.form;
         const order = this.props.handlingOrder;
-        const employeeId = localStorage.getItem('ID')
-        console.log(this.props.parkingLots)
+        const employeeId = Number(localStorage.getItem('ID'))
         const parkingLots = this.props.parkingLots
             .filter(parkingLot => {return (employeeId === parkingLot.employeeId)})
             .filter(parkingLot => {return (parkingLot.availablePositionCount > 0)})
@@ -46,7 +45,6 @@ class HandleParkingOrderPage extends Component {
                     value: parkingLot.id
                 }
             });
-
         return (
             <WingBlank size="md">
                 <WhiteSpace size="sm" />
