@@ -28,7 +28,7 @@ export default class WelcomesPageContainer extends Component {
                 <WhiteSpace size="md" />
 
                 <WingBlank size="md" style={{textAlign: 'center'}}>
-                    <img src='/images/parkingsmart_logo.svg'
+                    <img src='/images/parking_smart_logo.png'
                         style={{
                             width: '80%'
                         }}
@@ -40,7 +40,8 @@ export default class WelcomesPageContainer extends Component {
                 <WingBlank size="md">
                     <Button
                         style={{
-                            height: '70px'
+                            height: '80px',
+                            paddingTop: '0.3em'
                         }}
                         onClick={() => {this.directToPage("/customer")}}>
                         <img src='/images/customer.svg'
@@ -58,7 +59,8 @@ export default class WelcomesPageContainer extends Component {
                 <WingBlank size="md">
                     <Button 
                         style={{
-                            height: '70px'
+                            height: '80px',
+                            paddingTop: '0.3em'
                         }}
                         onClick={() => {this.directToPage("/employeelogin")}}>
                         <img src='/images/parking_boy.svg'/>
@@ -68,7 +70,7 @@ export default class WelcomesPageContainer extends Component {
                 
                 <WhiteSpace size="md" />
                 
-                <p>Date: {this.state.curTime}</p>
+                <p style={{textAlign: 'center'}}>Date: {this.state.curTime}</p>
             </div>
         )
     }
