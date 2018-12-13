@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List, WhiteSpace, WingBlank, Picker, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import ParkingOrderResource from '../resources/ParkingOrderResource';
-import ParkingLotResource from '../resources/ParkingLotResource';
+import ParkingClerkResource from '../resources/ParkingClerkResource';
 
 const Item = List.Item;
 
@@ -12,7 +12,7 @@ class HandleParkingOrderPage extends Component {
         if (localStorage.getItem('AUTH') === null && localStorage.getItem('ROLE') === null) {
           return;
         }
-        ParkingLotResource.getAll()
+        ParkingClerkResource.getOwnedParkingLots()
         .then(res => res.json())
         .then(res => {
             this.props.refreshAllParkingLots(res);
@@ -24,7 +24,7 @@ class HandleParkingOrderPage extends Component {
             return;
         }
         let parkingLotId = this.props.form.getFieldProps('parkingLot').value[0];
-        ParkingOrderResource.markCompleted({...this.props.handlingOrder, parkingLotId: parkingLotId})
+        ParkingOrderResource.markCompleted({...this.props.handlingOrder, parkingLotId: parkingLotId, ownedByEmployeeId: Number(localStorage.getItem('ID'))})
         .then(res => {
             this.props.updateSelectedTab('/employee/completeorder');
             window.history.pushState(null, null, "/employee/completeorder");
@@ -37,7 +37,6 @@ class HandleParkingOrderPage extends Component {
         const order = this.props.handlingOrder;
         const employeeId = Number(localStorage.getItem('ID'))
         const parkingLots = this.props.parkingLots
-            .filter(parkingLot => {return (employeeId === parkingLot.employeeId)})
             .filter(parkingLot => {return (parkingLot.availablePositionCount > 0)})
             .map(parkingLot => {
                 return {
@@ -119,18 +118,37 @@ class HandleParkingOrderPage extends Component {
                                 </tbody>
                             </table>
                         </Item>
-                        <Picker data={parkingLots} extra="Please choose" cols={1} {...getFieldProps('parkingLot', {
-                                validate: [{
-                                trigger: 'onBlur',
-                                rules: [{
-                                    required: true,
-                                }]
-                            }]})}>
-                            <Item multipleLine arrow="horizontal">&nbsp;Parking Lot: </Item>
-                        </Picker>
+                        { order.status === 'Completed' ? 
+                            <Item
+                                multipleLine
+                                onClick={() => {}}
+                                key='parkingLot'
+                            >
+                                <table style={{width: '100%'}}>
+                                    <tbody>
+                                        <tr>
+                                            <td>ParkingLot: </td>
+                                            <td style={{float: 'right'}}>{order.parkingLot}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </Item> : 
+                            <Picker data={parkingLots} extra="Please choose" cols={1} {...getFieldProps('parkingLot', {
+                                    validate: [{
+                                    trigger: 'onBlur',
+                                    rules: [{
+                                        required: true,
+                                    }]
+                                }]})}>
+                                <Item multipleLine arrow="horizontal">&nbsp;Parking Lot: </Item>
+                            </Picker>
+                        }
                     </List>
                     <WhiteSpace size="xl" />
-                    <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit} disabled={!this.props.form.getFieldProps('parkingLot').value}>Done !</Button>
+                        { order.status === 'Completed' ? 
+                            null : 
+                            <Button icon="check-circle-o" className="greenButton" onClick={this.onSubmit} disabled={!this.props.form.getFieldProps('parkingLot').value}>Done !</Button>
+                        }
                 </form>
             </WingBlank>
         )

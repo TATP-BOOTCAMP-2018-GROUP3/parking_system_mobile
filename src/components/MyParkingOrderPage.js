@@ -10,7 +10,7 @@ const Brief = Item.Brief;
 
 class MyParkingOrderPage extends Component {
     componentDidMount() {
-        this.getAllInProgressParkingOrders();
+        this.getAllOwnedParkingOrders();
         if (this.props.popupMsg && this.props.popupMsg.type != 'null') {
             this.createNotification(this.props.popupMsg)
             this.props.handleUpdatePopupMsg(null)
@@ -37,7 +37,7 @@ class MyParkingOrderPage extends Component {
         };
     }
 
-    getAllInProgressParkingOrders() {
+    getAllOwnedParkingOrders() {
         ParkingClerkResource.getOwnedParkingOrders(this.props.employeeId)
             .then(res => res.json())
             .then(res => {
@@ -61,7 +61,7 @@ class MyParkingOrderPage extends Component {
 
                 <NotificationContainer />
 
-                <List renderHeader={() => 'Grabbed Parking Orders'} style={{ maxHeight: '200px' }}>
+                <List renderHeader={() => 'User: ' + localStorage.USERNAME + ' - ' + 'Grabbed Parking Orders'} style={{ maxHeight: '200px' }}>
                     {this.props.inProgressOrders.length > 0 ?
                         this.props.inProgressOrders.map((order) =>
                             <Item

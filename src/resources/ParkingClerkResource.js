@@ -9,6 +9,22 @@ export default {
                                 headers: new Headers({
                                     'Authorization': 'Bearer ' + localStorage.getItem('AUTH')
                                 })
+                            }),
+    getOwnedReturnOrders: () => fetch(hostname + resourceName + "/" + localStorage.getItem("ID") + "/returnorders",
+                            {
+                                method: 'GET', 
+                                mode: 'cors',
+                                headers: new Headers({
+                                    'Authorization': 'Bearer ' + localStorage.getItem('AUTH')
+                                })
+                            }),
+    getOwnedParkingLots: () => fetch(hostname + resourceName + "/" + localStorage.getItem("ID") + "/parkinglots",
+                            {
+                                method: 'GET', 
+                                mode: 'cors',
+                                headers: new Headers({
+                                    'Authorization': 'Bearer ' + localStorage.getItem('AUTH')
+                                })
                             })
   
 }

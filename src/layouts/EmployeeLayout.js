@@ -127,11 +127,12 @@ class MainLayout extends Component {
             onPress={() => {
               this.props.updateSelectedTab('/employee/returnorders');
               window.history.pushState(null, null, "/employee/returnorders");
-              ReturnOrderResource.getByStatus("Pending")
-              .then(res => res.json())
-              .then(res => {
-                  this.props.refreshPendingOrders(res);
-              });
+              ParkingClerkResource.getOwnedReturnOrders(this.props.employeeId)
+                  .then(res => res.json())
+                  .then(res => {
+                      this.props.refreshPendingOrders(res.sort(sortInProgressOrder));
+                  })
+                  .catch(res => console.log(res));
             }}
           >
             {

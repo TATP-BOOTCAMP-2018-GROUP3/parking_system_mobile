@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { List, Tag } from 'antd-mobile';
-import ReturnOrderResource from '../resources/ReturnOrderResource';
+import ParkingClerkResource from '../resources/ParkingClerkResource';
+import { sortInProgressOrder } from'../util/GeneralUtil';
 
 const Item = List.Item;
 const Brief = Item.Brief;
 
 class MyReturnOrderPage extends Component {
     componentDidMount() {
-        this.getAllPendingReturnOrders();
+        this.getAllOwnedParkingOrders();
     }
 
-    getAllPendingReturnOrders(){
-        ReturnOrderResource.getByStatus("Pending")
-        .then(res => res.json())
-        .then(res => {
-            this.props.refreshPendingOrders(res);
-        });
+    getAllOwnedParkingOrders(){
+        ParkingClerkResource.getOwnedReturnOrders(this.props.employeeId)
+            .then(res => res.json())
+            .then(res => {
+                this.props.refreshPendingOrders(res.sort(sortInProgressOrder));
+            })
+            .catch(res => console.log(res));
     }
 
     handleOrder(order){
@@ -27,7 +29,7 @@ class MyReturnOrderPage extends Component {
 
     render() {
         return (
-            <List renderHeader={() => 'Pending Return Orders'} style={{maxHeight: '200px'}}>
+            <List renderHeader={() => 'User: ' + localStorage.USERNAME + ' - ' + 'Pending Return Orders'} style={{maxHeight: '200px'}}>
                 {this.props.pendingOrders.length > 0 ?
                     this.props.pendingOrders.map((order) => 
                     <Item
@@ -60,7 +62,13 @@ class MyReturnOrderPage extends Component {
                                         <td>Contact Number: {order.phoneNumber}</td>
                                     </tr>
                                     <tr>
-                                        <td><Tag style={{backgroundColor: '#fbbd08', color: 'white', borderColor: '#fbbd08', lineHeight: '1.5'}}> {order.status} </Tag></td>
+                                        <td>
+                                            { order.status === 'Pending' ?
+                                                <Tag style={{ backgroundColor: '#db2828', color: 'white', borderColor: '#db2828', lineHeight: '1.5' }}> {order.status} </Tag>
+                                                :
+                                                <Tag style={{ backgroundColor: '#21ba45', color: 'white', borderColor: '#21ba45', lineHeight: '1.5' }}> {order.status} </Tag>
+                                            }
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
