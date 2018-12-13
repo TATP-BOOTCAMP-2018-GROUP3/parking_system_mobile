@@ -20,15 +20,15 @@ export default {
                         }),
                         body: JSON.stringify(order)
                     }),
-    grab: (order) => fetch(hostname + resourceName + "/" + order.id,
+    grab: (order) => fetch(hostname + "/parkingclerks/" + localStorage.getItem('ID') + resourceName,
                     {
-                        method: 'PUT',
+                        method: 'POST',
                         mode: 'cors',
                         headers: new Headers({
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + localStorage.getItem('AUTH')
                         }),
-                        body: JSON.stringify({...order, status: 'In Progress', ownedByEmployeeId: localStorage.getItem('ID')})
+                        body: JSON.stringify({...order, status: 'In Progress'})
                     }),
     markCompleted: (order) => fetch(hostname + resourceName + "/" + order.id,
                     {
