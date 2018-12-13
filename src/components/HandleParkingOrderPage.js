@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List, WhiteSpace, WingBlank, Picker, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import ParkingOrderResource from '../resources/ParkingOrderResource';
-import ParkingLotResource from '../resources/ParkingLotResource';
+import ParkingClerkResource from '../resources/ParkingClerkResource';
 
 const Item = List.Item;
 
@@ -12,7 +12,7 @@ class HandleParkingOrderPage extends Component {
         if (localStorage.getItem('AUTH') === null && localStorage.getItem('ROLE') === null) {
           return;
         }
-        ParkingLotResource.getAll()
+        ParkingClerkResource.getOwnedParkingLots()
         .then(res => res.json())
         .then(res => {
             this.props.refreshAllParkingLots(res);
@@ -24,7 +24,7 @@ class HandleParkingOrderPage extends Component {
             return;
         }
         let parkingLotId = this.props.form.getFieldProps('parkingLot').value[0];
-        ParkingOrderResource.markCompleted({...this.props.handlingOrder, parkingLotId: parkingLotId})
+        ParkingOrderResource.markCompleted({...this.props.handlingOrder, parkingLotId: parkingLotId, ownedByEmployeeId: Number(localStorage.getItem('ID'))})
         .then(res => {
             this.props.updateSelectedTab('/employee/completeorder');
             window.history.pushState(null, null, "/employee/completeorder");
@@ -37,7 +37,6 @@ class HandleParkingOrderPage extends Component {
         const order = this.props.handlingOrder;
         const employeeId = Number(localStorage.getItem('ID'))
         const parkingLots = this.props.parkingLots
-            .filter(parkingLot => {return (employeeId === parkingLot.employeeId)})
             .filter(parkingLot => {return (parkingLot.availablePositionCount > 0)})
             .map(parkingLot => {
                 return {
