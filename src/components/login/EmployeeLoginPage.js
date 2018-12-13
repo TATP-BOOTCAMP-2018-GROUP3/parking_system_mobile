@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'antd-mobile/dist/antd-mobile.css';
-import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
+import { List, InputItem, WingBlank, WhiteSpace, Button, Toast } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import AuthResource from '../../resources/AuthResource';
 
@@ -14,13 +14,18 @@ class EmployeeLoginPage extends Component {
         let password = this.props.form.getFieldProps('password').value;
         AuthResource.login({accountName: username, password: password})
         .then(res => {
-            if (!(res.status === 200)) {
-                throw new Error(res.status)
+            if (res.status === 400) {
+                throw new Error("Login fail! Please check your information!");
+            } else if (res.status === 500) {
+                throw new Error("Service is currently unavailable.");
             }
             return res.json();
         })
         .then(res => {
             let tokenPayload = JSON.parse(atob(res.token.split('.')[1]));
+            if (tokenPayload.role !== 'CLERK') {
+                throw new Error("Login fail!");
+            }
             localStorage.setItem('AUTH', res.token);
             localStorage.setItem('ROLE', tokenPayload.role);
             localStorage.setItem('ID', tokenPayload.id);
@@ -28,12 +33,12 @@ class EmployeeLoginPage extends Component {
             this.props.history.push('/employee');
         })
         .catch(error => {
-            if (error.message === '400') {
-                console.log('login fail!');
-            } else if (error.message === '500') {
-                console.log('server unavailable');
-            }
+            Toast.fail(error.message, 1);
         })
+    }
+
+    goToHomePage = () => {
+        this.props.history.push('/');
     }
 
     componentWillMount() {
@@ -47,6 +52,7 @@ class EmployeeLoginPage extends Component {
             })
         }.bind(this), 1000);
     }
+
     render() {
 
         const { getFieldProps } = this.props.form;
@@ -74,10 +80,13 @@ class EmployeeLoginPage extends Component {
                 <WhiteSpace />
                 <Button type="primary" onClick={this.submitLoginRequest}>Login</Button>
                 <WhiteSpace />
+                <Button type="warning" onClick={this.goToHomePage}>Exit</Button>
+                <WhiteSpace />
 
             </WingBlank>
         )
     }
 }
-EmployeeLoginPage = createForm()(EmployeeLoginPage);
-export default EmployeeLoginPage;
+
+const EmployeeLoginPageWrapper = createForm()(EmployeeLoginPage);
+export default EmployeeLoginPageWrapper;
